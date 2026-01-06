@@ -1,19 +1,15 @@
 import sys
+input = sys.stdin.readline
 from collections import deque
-from typing import Any
 
-n = int(sys.stdin.readline()) 
+N = int(input())
+myQueue = deque()
 
+for i in range(1, N+1):
+    myQueue.append(i)
 
-q = deque(list(range(1, n + 1)))
-cnt=int(n)
+while len(myQueue) > 1:
+    myQueue.popleft()
+    myQueue.append(myQueue.popleft())
 
-while cnt>1:
-    q.popleft()
-    q.append(q.popleft())
-
-    cnt-=1
-    if cnt==1: 
-        break
-    
-print(q[0])
+print(myQueue[0])
