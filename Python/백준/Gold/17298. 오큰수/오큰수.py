@@ -1,18 +1,18 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())  
-arr = list(map(int, input().split()))  
-
-stack = []  
-result = [-1] * n  
-
+n = int(input())
+ans = [0] * n
+A = list(map(int, input().split()))
+myStack = []
 
 for i in range(n):
-    while stack and arr[i] > arr[stack[-1]]:
-        index = stack.pop()     
-        result[index] = arr[i]    
+    while myStack and A[myStack[-1]] < A[i]:
+        ans[myStack.pop()] = A[i]   
+    myStack.append(i)
 
-    stack.append(i)
-    
-print(*result)
+while myStack:
+    ans[myStack.pop()] = -1
+
+for i in range(n):
+    sys.stdout.write(str(ans[i]) + " ")
