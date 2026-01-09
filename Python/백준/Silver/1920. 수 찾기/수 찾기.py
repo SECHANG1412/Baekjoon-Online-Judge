@@ -1,30 +1,24 @@
 import sys
+input = sys.stdin.readline
 
-N = int(sys.stdin.readline()) 
-A = list(map(int, sys.stdin.readline().split()))[:N]
-A = sorted(A)
-
-M = int(sys.stdin.readline())
-B = list(map(int, sys.stdin.readline().split()))[:M]
-
-
-for i in B:
-    left=0
-    right=len(A)-1
-
-    get=False
+def binary_search(array, target):
+    left, right = 0, len(array) - 1
 
     while left <= right:
-        mid = (left+right)//2
-        if A[mid]<i: 
-            left=mid+1
-        elif A[mid]>i: 
-            right=mid-1
-        else: 
-            get=True 
-            break
+        mid = (left + right) // 2  
+        if array[mid] == target:  
+            return 1
+        elif array[mid] < target:  
+            left = mid + 1
+        else:                      
+            right = mid - 1
 
-    if get: 
-        print('1')
-    else: 
-        print('0')
+    return 0  
+
+N = int(input())                        
+A = sorted(map(int, input().split()))  
+M = int(input())                        
+targets = list(map(int, input().split()))
+
+for t in targets:
+    print(binary_search(A, t))
