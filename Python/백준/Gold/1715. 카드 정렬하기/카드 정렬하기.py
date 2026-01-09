@@ -1,19 +1,23 @@
-import heapq
 import sys
+input = sys.stdin.readline
+from queue import PriorityQueue
 
-n = int(sys.stdin.readline())
+N = int(input())
+pq = PriorityQueue()
 
-cards = [int(input()) for _ in range(n)]
+for _ in range(N):
+    date = int(input())
+    pq.put(date)
 
-heapq.heapify(cards)  # 카드 묶음 리스트를 최소 힙으로 변환
+data1 = 0
+data2 = 0
+sum = 0
 
-total = 0
-
-while len(cards) > 1:
-    a = heapq.heappop(cards)
-    b = heapq.heappop(cards)
-    cost = a + b
-    total += cost
-    heapq.heappush(cards, cost)
-
-print(total)
+while pq.qsize()>1:
+    data1 = pq.get()
+    data2 = pq.get()
+    temp = data1 + data2
+    sum += temp
+    pq.put(temp)
+    
+print(sum)
